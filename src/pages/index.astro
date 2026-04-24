@@ -1,0 +1,43 @@
+---
+/**
+ * index.astro — Orquestador de pantallas y estados del juego.
+ *
+ * Máquina de estados:
+ *   menu → songSelect → countdown → playing → (stopped) → menu
+ *
+ * La comunicación entre componentes se hace con CustomEvents en document.
+ */
+import TypeSelector  from '../components/TypeSelector.astro';
+import LevelSelector from '../components/LevelSelector.astro';
+import SongSelector  from '../components/SongSelector.astro';
+import Countdown     from '../components/Countdown.astro';
+import GameBoard     from '../components/GameBoard.astro';
+
+import { songs } from '../config/songsConfig.js';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego Tapete</title>
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: #0a0a0a; font-family: system-ui, sans-serif; overflow: hidden; }
+      .hidden { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <TypeSelector />
+    <LevelSelector />
+    <SongSelector />
+    <Countdown />
+    <GameBoard />
+
+    <!-- Pasamos la config de canciones al cliente como JSON inerte -->
+    <script type="application/json" id="songs-data" set:html={JSON.stringify(songs)}></script>
+
+    <script src="/game.js" defer></script>
+  </body>
+</html>

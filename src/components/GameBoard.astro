@@ -1,0 +1,249 @@
+---
+/**
+    * GameBoard — Contenedor del tablero de juego.
+    * Alberga tres modos: colores (2x2), números (3x3) y formas (2x2).
+    * El modo activo se controla desde game.js añadiendo/quitando .hidden
+    * en los sub-tableros #board-colors, #board-numbers, #board-shapes.
+    * Cada cuadrante recibe .active cuando se enciende.
+    */
+---
+
+<div class="game-board hidden" id="game-board">
+
+    <!-- ── Modo: Colores ─────────────────────────────────── -->
+    <div class="board-inner board-colors hidden" id="board-colors">
+        <div class="quadrant yellow" id="q-yellow"></div>
+        <div class="quadrant blue" id="q-blue"></div>
+        <div class="quadrant green" id="q-green"></div>
+        <div class="quadrant red" id="q-red"></div>
+    </div>
+
+    <!-- ── Modo: Números ─────────────────────────────────── -->
+    <div class="board-inner board-numbers hidden" id="board-numbers">
+        <div class="quad-num" id="q-1">1</div>
+        <div class="quad-num" id="q-2">2</div>
+        <div class="quad-num" id="q-3">3</div>
+        <div class="quad-num" id="q-4">4</div>
+        <div class="quad-num" id="q-5">5</div>
+        <div class="quad-num" id="q-6">6</div>
+        <div class="quad-num" id="q-7">7</div>
+        <div class="quad-num" id="q-8">8</div>
+        <div class="quad-num" id="q-9">9</div>
+    </div>
+
+    <!-- ── Modo: Formas ──────────────────────────────────── -->
+    <div class="board-inner board-shapes hidden" id="board-shapes">
+        <!-- Cuadrado azul — arriba izquierda -->
+        <div class="quad-shape shape-square" id="q-square">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Cuadrado">
+                <rect x="15" y="15" width="70" height="70" rx="4"/>
+            </svg>
+        </div>
+        <!-- Círculo amarillo — arriba derecha -->
+        <div class="quad-shape shape-circle" id="q-circle">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Círculo">
+                <circle cx="50" cy="50" r="40"/>
+            </svg>
+        </div>
+        <!-- Triángulo rojo — abajo izquierda -->
+        <div class="quad-shape shape-triangle" id="q-triangle">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Triángulo">
+                <polygon points="50,12 92,88 8,88"/>
+            </svg>
+        </div>
+        <!-- Rectángulo verde — abajo derecha -->
+        <div class="quad-shape shape-rectangle" id="q-rectangle">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Rectángulo">
+                <rect x="8" y="28" width="84" height="44" rx="4"/>
+            </svg>
+        </div>
+    </div>
+
+    <button class="stop-btn" id="stop-btn">■ Detener</button>
+</div>
+
+<style>
+    .game-board {
+        position: fixed;
+        inset: 0;
+        background: #000;
+    }
+
+    /* Cada sub-tablero ocupa exactamente el contenedor fijo */
+    .board-inner {
+        position: absolute;
+        inset: 0;
+        display: grid;
+    }
+
+    /* ── Colores: 2×2 ───────────────────────────────────── */
+    .board-colors {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .quadrant.yellow {
+        background: #1a1400;
+    }
+
+    .quadrant.blue {
+        background: #00051a;
+    }
+
+    .quadrant.green {
+        background: #001a00;
+    }
+
+    .quadrant.red {
+        background: #1a0000;
+    }
+
+    .quadrant.yellow.active {
+        background: #ffe600;
+    }
+
+    .quadrant.blue.active {
+        background: #0066ff;
+    }
+
+    .quadrant.green.active {
+        background: #00cc44;
+    }
+
+    .quadrant.red.active {
+        background: #ff1a1a;
+    }
+
+    /* ── Números: 3×3 ───────────────────────────────────── */
+    .board-numbers {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .quad-num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+        color: #333;
+        font-size: clamp(3rem, 8vw, 8rem);
+        font-weight: 900;
+        border: 1px solid #1a1a1a;
+        user-select: none;
+        transition: none;
+    }
+
+    .quad-num.active {
+        background: #0066ff;
+        color: #fff;
+    }
+
+    /* ── Formas: 2×2 ────────────────────────────────────── */
+    .board-shapes {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .quad-shape {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+    }
+
+    .quad-shape svg {
+        width: 65%;
+        height: 65%;
+    }
+
+    /* Inactivo — fondo oscuro, forma con color tenue */
+    .shape-square {
+        background: #00051a;
+    }
+
+    .shape-circle {
+        background: #1a1400;
+    }
+
+    .shape-triangle {
+        background: #1a0000;
+    }
+
+    .shape-rectangle {
+        background: #001a00;
+    }
+
+    .shape-square svg {
+        fill: #002266;
+    }
+
+    .shape-circle svg {
+        fill: #665500;
+    }
+
+    .shape-triangle svg {
+        fill: #660000;
+    }
+
+    .shape-rectangle svg {
+        fill: #005522;
+    }
+
+    /* Activo — fondo brillante, forma en blanco (o negro para amarillo) */
+    .shape-square.active {
+        background: #0066ff;
+    }
+
+    .shape-circle.active {
+        background: #ffe600;
+    }
+
+    .shape-triangle.active {
+        background: #ff1a1a;
+    }
+
+    .shape-rectangle.active {
+        background: #00cc44;
+    }
+
+    .shape-square.active svg {
+        fill: #ffffff;
+    }
+
+    .shape-circle.active svg {
+        fill: #ffffff;
+    }
+
+    .shape-triangle.active svg {
+        fill: #ffffff;
+    }
+
+    .shape-rectangle.active svg {
+        fill: #ffffff;
+    }
+
+    /* ── Botón de parada ────────────────────────────────── */
+    .stop-btn {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.6rem 1.4rem;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        border: 1px solid #555;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.2s;
+    }
+
+    .stop-btn:hover {
+        background: rgba(255, 50, 50, 0.6);
+    }
+
+    .hidden {
+        display: none !important;
+    }
+</style>

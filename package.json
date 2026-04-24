@@ -1,0 +1,14 @@
+{
+  "name": "juego-tapete",
+  "version": "1.0.0",
+  "description": "Juego de tapete interactivo con cuadrantes de colores",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^6.1.8"
+  }
+}

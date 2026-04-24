@@ -1,0 +1,40 @@
+---
+/**
+ * Countdown — Cuenta atrás visual (5 → 0) antes de iniciar el juego.
+ * El número se actualiza desde el orquestador vía window.__setCountdown(n).
+ */
+---
+
+<section class="countdown hidden" id="countdown">
+  <span class="number" id="countdown-number">5</span>
+</section>
+
+<style>
+  .countdown {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+
+  .number {
+    font-size: 20vw;
+    font-weight: 900;
+    color: #fff;
+    /* Animación de pulso en cada cambio de número */
+    animation: pulse 1s ease-out;
+  }
+
+  @keyframes pulse {
+    0%   { transform: scale(1.4); opacity: 0.5; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>
+

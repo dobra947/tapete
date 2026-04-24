@@ -1,0 +1,92 @@
+---
+/**
+ * TypeSelector — Pantalla inicial para elegir el modo de juego.
+ * Modos: colores | numeros | formas
+ */
+---
+
+<section class="type-selector" id="type-selector">
+  <h1 class="title">Juego Tapete</h1>
+  <p class="subtitle">¿Qué quieres jugar?</p>
+  <div class="type-grid">
+    <button class="type-btn" data-type="colors">
+      <span class="type-icon">🎨</span>
+      <span class="type-label">Colores</span>
+    </button>
+    <button class="type-btn" data-type="numbers">
+      <span class="type-icon">🔢</span>
+      <span class="type-label">Números</span>
+    </button>
+    <button class="type-btn" data-type="shapes">
+      <span class="type-icon">🔷</span>
+      <span class="type-label">Formas</span>
+    </button>
+  </div>
+</section>
+
+<style>
+  .type-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #0a0a0a;
+    color: #fff;
+    gap: 2rem;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    color: #aaa;
+  }
+
+  .type-grid {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .type-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 2.5rem;
+    background: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #fff;
+    min-width: 150px;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  }
+
+  .type-btn:hover {
+    background: #2e2e2e;
+    border-color: #666;
+    transform: translateY(-2px);
+  }
+
+  .type-btn:active {
+    transform: translateY(0);
+  }
+
+  .type-icon {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .type-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+</style>
