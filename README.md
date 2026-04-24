@@ -1,6 +1,6 @@
 # Juego Tapete
 
-Juego web interactivo de cuadrantes de colores construido con Astro.
+Juego web interactivo de cuadrantes de colores, numeros o formas construido con Astro.
 
 ## Requisitos
 
